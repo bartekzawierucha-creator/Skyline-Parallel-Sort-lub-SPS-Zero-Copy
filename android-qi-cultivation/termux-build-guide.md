@@ -7,7 +7,7 @@ Poniżej masz prostą procedurę, żeby zbudować APK na telefonie przez Termux.
 ```bash
 pkg update -y
 pkg upgrade -y
-pkg install -y openjdk-17 gradle unzip tar curl
+pkg install -y openjdk-17 gradle unzip tar curl aapt2
 ```
 
 Sprawdź Java:
@@ -40,6 +40,7 @@ export PATH=$JAVA_HOME/bin:$PATH
 
 echo "JAVA_HOME=$JAVA_HOME"
 java -version
+which aapt2
 ```
 
 ## 4) Pobierz Android SDK i narzędzia
@@ -61,15 +62,20 @@ Jeśli to nie przejdzie, to problem jest po stronie sieci/proxy i trzeba odbloko
 ./scripts/build_apk.sh
 ```
 
+Jeśli zobaczysz błąd `AAPT2 ... Daemon startup failed`, to znaczy że Gradle próbuje użyć binarki AAPT2 dla Linux x86_64.
+`build_apk.sh` automatycznie wymusi lokalne `aapt2` z Termuxa (`android.aapt2FromMavenOverride`), ale musisz mieć pakiet:
+
+```bash
+pkg install -y aapt2
+```
+
 Jeśli zobaczysz błąd:
 `Starting in Kotlin 2.0, the Compose Compiler Gradle plugin is required...`
-to wykonaj najpierw:
+to wykonaj:
 
 ```bash
 git pull
 ```
-
-i uruchom build ponownie.
 
 Po sukcesie APK będzie tutaj:
 

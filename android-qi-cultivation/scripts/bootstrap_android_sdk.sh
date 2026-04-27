@@ -8,6 +8,10 @@ TOOLS_URL="https://dl.google.com/android/repository/${TOOLS_ZIP}"
 mkdir -p "$SDK_ROOT/cmdline-tools"
 cd "$SDK_ROOT"
 
+if [[ "${PREFIX:-}" == *"com.termux"* ]] && command -v pkg >/dev/null 2>&1; then
+  pkg install -y aapt2 >/dev/null
+fi
+
 if [[ ! -f "$TOOLS_ZIP" ]]; then
   curl -L -o "$TOOLS_ZIP" "$TOOLS_URL"
 fi
