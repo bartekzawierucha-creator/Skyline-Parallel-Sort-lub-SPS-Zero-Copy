@@ -91,4 +91,4 @@ Szczegółowa instrukcja budowy w Termux znajduje się w pliku:
 termux-build-guide.md
 ```
 
-> Uwaga dla Termuxa: jeśli build wywala `AAPT2 ... Daemon startup failed`, doinstaluj `aapt2` (`pkg install -y aapt2`) i uruchom `./scripts/build_apk.sh` ponownie. Skrypt automatycznie użyje lokalnej binarki `aapt2`.
+> Uwaga dla Termuxa: jeśli build wywala `AAPT2 ... Daemon startup failed`, doinstaluj `aapt2` (`pkg install -y aapt2`) i uruchamiaj build przez `./scripts/build_apk.sh` (nie przez surowe `./gradlew assembleDebug`). Skrypt automatycznie wymusza lokalną binarkę `aapt2`.

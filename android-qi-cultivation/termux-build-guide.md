@@ -69,6 +69,15 @@ Jeśli zobaczysz błąd `AAPT2 ... Daemon startup failed`, to znaczy że Gradle 
 pkg install -y aapt2
 ```
 
+I uruchamiaj build przez skrypt (nie `./gradlew` bez parametrów):
+
+```bash
+./scripts/build_apk.sh
+```
+
+W logu powinno pojawić się:
+`Using local aapt2 override: /data/data/com.termux/files/usr/bin/aapt2`
+
 Jeśli zobaczysz błąd:
 `Starting in Kotlin 2.0, the Compose Compiler Gradle plugin is required...`
 to wykonaj:

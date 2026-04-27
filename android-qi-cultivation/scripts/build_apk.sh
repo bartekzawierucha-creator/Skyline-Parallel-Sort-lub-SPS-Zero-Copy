@@ -27,6 +27,8 @@ if command -v aapt2 >/dev/null 2>&1; then
   AAPT2_BIN="$(command -v aapt2)"
   echo "Using local aapt2 override: $AAPT2_BIN"
   AAPT2_OVERRIDE_ARGS+=("-Pandroid.aapt2FromMavenOverride=$AAPT2_BIN")
+  AAPT2_OVERRIDE_ARGS+=("-Dorg.gradle.project.android.aapt2FromMavenOverride=$AAPT2_BIN")
+  AAPT2_OVERRIDE_ARGS+=("-Pandroid.enableAapt2Daemon=false")
 elif [[ "${PREFIX:-}" == *"com.termux"* ]]; then
   echo "ERROR: Termux detected but 'aapt2' was not found."
   echo "Install it first: pkg install -y aapt2"
