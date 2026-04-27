@@ -3,9 +3,19 @@ set -euo pipefail
 
 export ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-$PWD/.android-sdk}"
 export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$PATH"
+if [[ -n "${JAVA_HOME:-}" && ! -d "${JAVA_HOME}" ]]; then
+  unset JAVA_HOME
+fi
 if [[ -d /root/.local/share/mise/installs/java/17.0.2 ]]; then
   export JAVA_HOME=/root/.local/share/mise/installs/java/17.0.2
   export PATH="$JAVA_HOME/bin:$PATH"
+fi
+if [[ -z "${JAVA_HOME:-}" ]]; then
+  JAVAC_BIN="$(command -v javac || true)"
+  if [[ -n "$JAVAC_BIN" ]]; then
+    export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$JAVAC_BIN")")")"
+    export PATH="$JAVA_HOME/bin:$PATH"
+  fi
 fi
 
 if [[ ! -x ./gradlew ]]; then

@@ -31,8 +31,15 @@ tar -xzf /sdcard/Download/qi-cultivation-termux-*.tar.gz
 
 ```bash
 cd ~/qi-cultivation/android-qi-cultivation
-export JAVA_HOME=$PREFIX/opt/openjdk
+# jeśli wcześniej ustawiałeś złe JAVA_HOME, wyczyść:
+unset JAVA_HOME
+
+# wykryj JAVA_HOME automatycznie po javac:
+export JAVA_HOME="$(dirname "$(dirname "$(readlink -f "$(which javac)")")")"
 export PATH=$JAVA_HOME/bin:$PATH
+
+echo "JAVA_HOME=$JAVA_HOME"
+java -version
 ```
 
 ## 4) Pobierz Android SDK i narzędzia
@@ -53,6 +60,16 @@ Jeśli to nie przejdzie, to problem jest po stronie sieci/proxy i trzeba odbloko
 ```bash
 ./scripts/build_apk.sh
 ```
+
+Jeśli zobaczysz błąd:
+`Starting in Kotlin 2.0, the Compose Compiler Gradle plugin is required...`
+to wykonaj najpierw:
+
+```bash
+git pull
+```
+
+i uruchom build ponownie.
 
 Po sukcesie APK będzie tutaj:
 
